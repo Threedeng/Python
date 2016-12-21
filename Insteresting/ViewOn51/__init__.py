@@ -39,7 +39,8 @@ def xmlHandler(xmlString):
         value = collection.getElementsByTagName(element)[0]
         value = value.childNodes[0].data
         data[element] = value
-        print element + ':' + value
+#        print element + ':' + value
+    print "get xml successfully"
     return  data
 
 def sendEmail(subject,contant):
@@ -64,14 +65,15 @@ def sendEmail(subject,contant):
 def getViewer():
     url = 'http://api.51job.com/'
     dir = 'api/user/get_resumeview_all.php?accountid=61596271&key=17ca24574384d58e95bed48e21356ff058305e3a'
-    lasttime = '2016-11-22 15:57'
+    lasttime = '2016-11-22 15:58'
     while True:
         result = httpget(url,dir)
         data = xmlHandler(result)
         if data['viewtime'] != lasttime:
             saveData(data)
             lasttime = data['viewtime']
-        time.sleep(600)
+            print 'Update successfully'
+        time.sleep(10)
 
 
 def saveData(data):
